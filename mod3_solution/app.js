@@ -14,7 +14,8 @@
     templateUrl: 'foundList.html',
     scope: {
       items: '<',
-      removeItem: '&onRemove'
+      removeItem: '&onRemove',
+      itemFound:'='
     },
     // controller: 'ShoppingListDirectiveController as list',
     controller: FoundItemDirectiveController,
@@ -29,16 +30,18 @@ function FoundItemDirectiveController() {
   var list = this;
 
   list.validateMsg = function () {
+    // console.log("length-->"+list.length);
+    //return list.itemFound;
     if(list.items===undefined){
       console.log("i ma undefined");
       return false;
     }else{
-      if(list.items.length < 0) {
-        console.log("found items");
-        return true;
+      if(list.items.length > 0) {
+        console.log("found items"+list.items.length);
+        return false;
       }else{
-      console.log("not found items");
-      return false;
+      console.log("not found items"+list.items.length);
+      return true;
     }
     }
 
@@ -51,7 +54,9 @@ function FoundItemDirectiveController() {
   function NarrowItDownController(MenuSearchService) {
     var naDwnCtrl = this;
 
-    //naDwnCtrl.searchTerm= "house-made dough dumpling";
+    naDwnCtrl.searchTerm= "";
+
+    naDwnCtrl.itemFound= false;
 
     naDwnCtrl.narrowDownMe= function () {
       //naDwnCtrl.items = [];
@@ -62,6 +67,10 @@ function FoundItemDirectiveController() {
       }
 
       naDwnCtrl.items = MenuSearchService.getMatchedMenuItems(naDwnCtrl.searchTerm);
+
+      if(naDwnCtrl.items.length>0){
+        naDwnCtrl.itemFound = true;
+      }
 
     }
 
