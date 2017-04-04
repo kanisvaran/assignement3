@@ -30,17 +30,17 @@ function FoundItemDirectiveController() {
   var list = this;
 
   list.validateMsg = function () {
-    // console.log("length-->"+list.length);
+    // .log("length-->"+list.length);
     //return list.itemFound;
     if(list.items===undefined){
-      console.log("i ma undefined");
+      ////console.log("i ma undefined");
       return false;
     }else{
       if(list.items.length > 0) {
-        console.log("found items"+list.items.length);
+        //console.log("found items"+list.items.length);
         return false;
       }else{
-      console.log("not found items"+list.items.length);
+      //console.log("not found items"+list.items.length);
       return true;
     }
     }
@@ -61,7 +61,7 @@ function FoundItemDirectiveController() {
     naDwnCtrl.narrowDownMe= function () {
       //naDwnCtrl.items = [];
       if(naDwnCtrl.searchTerm === ""){
-        console.log("searchTerm : "+naDwnCtrl.searchTerm);
+        //console.log("searchTerm : "+naDwnCtrl.searchTerm);
         naDwnCtrl.items = [];
         return naDwnCtrl.items;
       }
@@ -75,7 +75,7 @@ function FoundItemDirectiveController() {
     }
 
     naDwnCtrl.removeItem = function functionName(index) {
-      console.log("index Value"+index);
+      //console.log("index Value"+index);
         MenuSearchService.removeItems(index);
     }
 
@@ -92,7 +92,7 @@ function FoundItemDirectiveController() {
 
       foundItems = [];
 
-      console.log("searchTerm : " + searchTerm);
+      //console.log("searchTerm : " + searchTerm);
       var promise = $http({
             method:"GET",
             url: (ApiBasePath + "/menu_items.json")
@@ -104,36 +104,36 @@ function FoundItemDirectiveController() {
 
         var length = response.data.menu_items.length;
 
-        console.log("length : "+length);
+        //console.log("length : "+length);
 
         for(var x =0;x<response.data.menu_items.length;x++){
           var items = response.data.menu_items[x];
           var item =items;
 
           if(item.description.toLowerCase().indexOf(searchTerm.toLowerCase()) !==-1){
-              console.log(item.description.toLowerCase());
+              //console.log(item.description.toLowerCase());
               foundItems.push(item);
           }
 
           // for(var jsonObj in items){
-          //   console.log(jsonObj.id);
-          //   console.log("result : "+JSON.stringify(jsonObj));
+          //   //console.log(jsonObj.id);
+          //   //console.log("result : "+JSON.stringify(jsonObj));
           // }
 
         }
 
         // for(var menuItem in items){
-        //   console.log(" JSON String"+JSON.stringify(menuItem));
+        //   //console.log(" JSON String"+JSON.stringify(menuItem));
         //   var x = menuItem[0];
-        //   console.log(x);
+        //   //console.log(x);
         //
-        //   console.log(""+menuItem.short_name);
-        //   console.log("Next Item");
+        //   //console.log(""+menuItem.short_name);
+        //   //console.log("Next Item");
         // }
-        //   console.log("response.data : "+response.data);
+        //   //console.log("response.data : "+response.data);
       })
       .catch(function (error) {
-        console.log("error : "+error);
+        //console.log("error : "+error);
       });
 
 
@@ -142,7 +142,7 @@ function FoundItemDirectiveController() {
     };
 
     service.removeItems = function (indexValue) {
-        console.log(indexValue);
+        //console.log(indexValue);
         foundItems.splice(indexValue,1);
     }
 
